@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'LapKeuanganController@index');
+Route::get('file', 'LapKeuanganController@data');
+Route::get('export-file/{type}', 'LapKeuanganController@exportFile');
+Route::post('import-file', 'LapKeuanganController@importFile');
