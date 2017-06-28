@@ -17,7 +17,7 @@
         <tr>
             <th></th>
             <th>{{ $d['id'] }}</th>
-            <td style="text-align: center">{{ $d['tanggal'] }}</td>
+            <td style="text-align: center">{{ $date = date('d-m-Y', strtotime(str_replace('/', '-', $d['tanggal']))) }}</td>
             <td>{{ $d['keterangan'] }}</td>
             <td>{{ $d['debet'] }}</td>
             <td>{{ $d['kredit'] }}</td>

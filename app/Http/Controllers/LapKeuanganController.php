@@ -10,8 +10,39 @@ use Illuminate\Http\Request;
 
 class LapKeuanganController extends Controller
 {
+	// index
 	public function index() {
-		return view('index');
+		static $total_saldo = 0;
+
+		$data = LapKeuangan::all();
+		// total 
+		$total_debet  = DB::table('laporan_keuangan')->sum('debet');
+		$total_kredit = DB::table('laporan_keuangan')->sum('kredit');
+		$total_saldo  = DB::table('laporan_keuangan')->sum('saldo');
+
+		return view('index', compact('data','total_debet', 'total_kredit', 'total_saldo'));
+	}
+
+	// store
+	public function store(Request $request) {
+		$data = new LapKeuangan;
+
+		$data->tanggal 		= $date = date('Y-m-d', strtotime(str_replace('-', '/', $request->tanggal)));
+		$data->keterangan 	= ucwords($request->keterangan);
+		$data->debet 		= $request->debet;
+		$data->kredit 		= $request->kredit;
+		$data->saldo 		= $request->saldo;
+
+  		$data->save();
+
+  		return redirect('/');
+	}
+
+	// pilihan
+	public function saldo($pilihan) {
+		$data = LapKeuangan::where($pilihan);
+
+		return response()->json($data);
 	}
 
 	// import file

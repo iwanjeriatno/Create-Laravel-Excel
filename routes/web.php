@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', 'LapKeuanganController@index');
+Route::resource('/', 'LapKeuanganController');
 Route::get('file', 'LapKeuanganController@data');
 Route::get('export-file/{type}', 'LapKeuanganController@exportFile');
 Route::post('import-file', 'LapKeuanganController@importFile');
